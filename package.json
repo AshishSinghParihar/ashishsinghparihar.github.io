@@ -9,7 +9,9 @@
     "test": "ng test",
     "serve:ssr:youtube-lite": "node dist/youtube-lite/server/server.mjs",
     "lint": "ng lint",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "docs": "npx compodoc -p tsconfig.doc.json -s",
+    "docs:build": "npx compodoc -p tsconfig.doc.json"
   },
   "private": true,
   "dependencies": {
@@ -35,6 +37,7 @@
     "@angular-devkit/build-angular": "^18.0.6",
     "@angular/cli": "^18.0.6",
     "@angular/compiler-cli": "^18.0.0",
+    "@compodoc/compodoc": "^1.1.26",
     "@types/express": "^4.17.17",
     "@types/jasmine": "~5.1.0",
     "@types/node": "^18.18.0",
