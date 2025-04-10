@@ -54,8 +54,7 @@
   "lint-staged": {
     "*.{ts,html,scss}": [
       "prettier --write",
-      "eslint --fix",
-      "git add"
+      "eslint --fix"
     ]
   }
 }
