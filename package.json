@@ -2,17 +2,19 @@
   "name": "youtube-lite",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
     "build": "ng build",
-    "watch": "ng build --watch --configuration development",
+    "docs": "npx compodoc -p tsconfig.doc.json -s",
+    "docs:build": "npx compodoc -p tsconfig.doc.json",
+    "eslint": "npx eslint",
+    "format": "prettier --write \"src/**/*.{js,ts,html,css,scss}\"",
+    "lint": "ng lint",
+    "ng": "ng",
+    "prepare": "husky install",
+    "start": "ng serve",
+    "serve:ssr:youtube-lite": "node dist/youtube-lite/server/server.mjs",
     "test": "ng test",
     "test:no-watch": "ng test --watch=false --browsers=ChromeHeadless --code-coverage",
-    "serve:ssr:youtube-lite": "node dist/youtube-lite/server/server.mjs",
-    "lint": "ng lint",
-    "prepare": "husky install",
-    "docs": "npx compodoc -p tsconfig.doc.json -s",
-    "docs:build": "npx compodoc -p tsconfig.doc.json"
+    "watch": "ng build --watch --configuration development"
   },
   "private": true,
   "dependencies": {
