@@ -1,13 +1,5 @@
 {
-    "extends": "./tsconfig.app.json",
-    "exclude": [
-      "**/*.spec.ts",
-      "**/test/**",
-      "**/mocks/**",
-      "src/environments/**"
-    ],
-    "include": [
-      "src/**/*.ts"
-    ]
-  }
-  
+  "extends": "./tsconfig.app.json",
+  "exclude": ["**/*.spec.ts", "**/test/**", "**/mocks/**", "src/environments/**"],
+  "include": ["src/**/*.ts"]
+}
