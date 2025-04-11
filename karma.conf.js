@@ -13,7 +13,7 @@ module.exports = function (config) {
     client: {
       clearContext: false,
     },
-    reporters: ['spec', 'coverage'],
+    reporters: ['progress', 'kjhtml'],
     coverageReporter: {
       dir: require('path').join(__dirname, './coverage'),
       subdir: '.',
@@ -27,8 +27,8 @@ module.exports = function (config) {
         },
       },
     },
-    browsers: ['ChromeHeadless'],
-    singleRun: true,
+    browsers: ['Chrome'],
+    singleRun: false,
     restartOnFileChange: true,
   });
 };
