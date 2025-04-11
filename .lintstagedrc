@@ -1,0 +1,4 @@
+{
+  "**/*.{ts,js,html,scss,json,md}": ["prettier --write", "eslint --fix"],
+  "documentation/**/*": "echo '⏭️ Skipping generated docs folder...'"
+}

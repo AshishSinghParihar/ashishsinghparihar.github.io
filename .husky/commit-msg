@@ -1,0 +1,22 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "🔍 Validating commit message..."
+
+commit_msg_file=$1
+commit_msg=$(cat "$commit_msg_file")
+
+# Regex for conventional commits format: type(scope): subject
+pattern="^(feat|fix|docs|style|refactor|test|chore)(\([a-z\-]+\))?: .{1,}$"
+
+if echo "$commit_msg" | grep -qE "$pattern"; then
+  echo "✅ Commit message is valid."
+  exit 0
+else
+  echo "❌ Invalid commit message!"
+  echo "🧪 Example of valid messages:"
+  echo "  - feat(auth): add login support"
+  echo "  - fix(video): handle thumbnail error"
+  echo "  - chore: update dependencies"
+  exit 1
+fi

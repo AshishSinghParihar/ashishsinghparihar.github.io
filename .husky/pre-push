@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "🧪 Running tests with coverage check..."
+
+npm run test:no-watch
+
+if [ $? -ne 0 ]; then
+  echo "🚫 Push blocked: Test or coverage check failed (threshold not met or test failed)."
+  exit 1
+fi
+
+echo "✅ All tests passed and coverage is ≥ 90%."
+
+echo "🛠️ Building app..."
+
+ng build

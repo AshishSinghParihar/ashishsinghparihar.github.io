@@ -1,5 +1,7 @@
 # YoutubeLite
 
+[![Documentation](https://img.shields.io/badge/docs-live-blue)](https://ashishsinghparihar.github.io/documentation/index.html/)
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.6.
 
 ## Development server
