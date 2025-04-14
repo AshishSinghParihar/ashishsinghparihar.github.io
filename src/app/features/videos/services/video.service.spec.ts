@@ -1,14 +1,14 @@
 import { TestBed } from '@angular/core/testing';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 
 import { VideoService } from './video.service';
-import { HttpClient } from '@angular/common/http';
 
 describe('VideoService', () => {
   let service: VideoService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [HttpClient],
+      providers: [provideHttpClient(withFetch())],
     });
     service = TestBed.inject(VideoService);
   });
