@@ -4,4 +4,6 @@ export interface MockVideo {
   description?: string;
   thumbnail: string;
   visibility: string;
+  author?: string;
+  uploadDate?: string;
 }

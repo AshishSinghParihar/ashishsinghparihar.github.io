@@ -1,1 +1,17 @@
-<p>video-card works!</p>
+<div class="video-card">
+  <img
+    class="video-thumbnail"
+    [src]="video.thumbnail.url"
+    alt="Thumbnail for video {{ video.title }}"
+    [attr.height]="video.thumbnail.height + 'px'"
+    [attr.width]="video.thumbnail.width + 'px'"
+  />
+  <div class="video-card-content">
+    <div class="video-title">{{ video.title }}</div>
+    <div class="video-details">
+      <div class="video-description">{{ video.author }}</div>
+      <div class="video-description">{{ video.uploadDate | date }}</div>
+    </div>
+    <div class="video-description">{{ video.description }}</div>
+  </div>
+</div>

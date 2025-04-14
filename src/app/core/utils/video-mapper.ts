@@ -13,6 +13,8 @@ export function mapYouTubeVideoToVideo(youtubeVideo: YouTubeVideo): Video {
       youtubeVideo.videoVisibility === 'Public'
         ? VideoVisibilityEnum.PUBLIC
         : VideoVisibilityEnum.PRIVATE,
+    author: youtubeVideo.videoAuthor,
+    uploadDate: youtubeVideo.videoPostedOn,
   });
 }
 
@@ -28,5 +30,7 @@ export function mapMockVideoToVideo(mockVideo: MockVideo): Video {
     }),
     visibility:
       mockVideo.visibility === 'public' ? VideoVisibilityEnum.PUBLIC : VideoVisibilityEnum.PRIVATE,
+    author: mockVideo.author,
+    uploadDate: mockVideo.uploadDate,
   });
 }

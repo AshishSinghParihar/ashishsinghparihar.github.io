@@ -1,0 +1,45 @@
+.video-card {
+  display: flex;
+  overflow: hidden;
+  height: 380px;
+  width: 100%;
+  margin: 20px 0px;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+  background-color: #fff;
+
+  &:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .video-thumbnail {
+    margin: 10px;
+    object-fit: cover;
+    border-radius: 1rem;
+    cursor: pointer;
+  }
+
+  .video-card-content {
+    padding: 16px;
+
+    .video-title {
+      font-size: 16px;
+      font-weight: bold;
+      color: #333;
+      cursor: pointer;
+    }
+
+    .video-details {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .video-description {
+      font-size: 0.9rem;
+      color: #666;
+    }
+  }
+}

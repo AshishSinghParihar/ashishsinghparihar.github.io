@@ -6,6 +6,8 @@ export class Video {
   private readonly _description?: string;
   private readonly _thumbnail: Thumbnail;
   private readonly _visibility: VideoVisibilityEnum;
+  private readonly _author: string;
+  private readonly _uploadDate: string;
 
   constructor(data: any) {
     this._id = data?.id;
@@ -13,6 +15,8 @@ export class Video {
     this._description = data?.description;
     this._thumbnail = new Thumbnail(data?.thumbnail);
     this._visibility = data?.visibility;
+    this._author = data?.author;
+    this._uploadDate = data.uploadDate;
   }
 
   public get id(): string {
@@ -33,6 +37,14 @@ export class Video {
 
   public get visibility(): VideoVisibilityEnum {
     return this._visibility;
+  }
+
+  public get author(): string {
+    return this._author;
+  }
+
+  public get uploadDate(): string {
+    return this._uploadDate;
   }
 }
 

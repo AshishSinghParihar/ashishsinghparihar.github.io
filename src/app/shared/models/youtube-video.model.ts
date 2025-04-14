@@ -6,4 +6,6 @@ export interface YouTubeVideo {
   videoDescription?: string;
   videoThumbnail: Thumbnail;
   videoVisibility: string;
+  videoAuthor: string;
+  videoPostedOn: string;
 }
