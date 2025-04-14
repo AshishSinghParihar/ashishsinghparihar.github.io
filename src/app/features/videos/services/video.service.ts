@@ -29,7 +29,7 @@ export class VideoService {
     return of([]);
   }
 
-  fetchYoutubeVideos(query = 'public videos'): Observable<YouTubeVideo[]> {
+  fetchYoutubeVideos(query = 'education videos'): Observable<YouTubeVideo[]> {
     const url = environment.youTubeApiUrl
       .replace('PART', 'snippet')
       .replace('QUERY', query)
