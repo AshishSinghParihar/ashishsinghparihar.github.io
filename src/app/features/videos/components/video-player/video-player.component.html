@@ -1,13 +1,14 @@
 <div class="container video-view">
   <nav>
-    <div class="back-action" (click)="goBack()">
-      <button class="material-icons back-btn">arrow_back</button>
-      <span>Back</span>
-    </div>
-    <div class="back-action" (click)="goHome()">
-      <button class="material-icons back-btn">home</button>
-      <span>Home</span>
-    </div>
+    <button class="back-action" (click)="goBack()" mat-fab extended>
+      <mat-icon>arrow_back</mat-icon>
+      Back
+    </button>
+
+    <button class="home-action" (click)="goHome()" mat-fab extended>
+      <mat-icon>home</mat-icon>
+      Home
+    </button>
   </nav>
   <div class="video-player">
     <youtube-player [videoId]="videoId"></youtube-player>

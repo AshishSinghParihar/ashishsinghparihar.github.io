@@ -1,0 +1,25 @@
+.action-container {
+  display: flex;
+  align-items: center;
+  margin-top: 1.5em;
+
+  .refresh-btn {
+    margin-right: 2rem;
+  }
+
+  .search-box {
+    flex: 1;
+
+    .material-icon.btn {
+      margin-right: 5px;
+      font-size: 45px;
+    }
+  }
+}
+
+.no-videos {
+  margin-top: 2em;
+  text-align: center;
+  font-weight: 500;
+  color: rgb(64, 64, 64);
+}

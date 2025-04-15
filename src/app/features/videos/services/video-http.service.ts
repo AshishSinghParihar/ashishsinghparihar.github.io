@@ -9,6 +9,7 @@ import { VideoSourceEnum, VideoVisibilityEnum } from '../../../shared/enums/enum
 import { MockVideo } from '../../../shared/models/mock-video.model';
 import { YouTubeVideo } from '../../../shared/models/youtube-video.model';
 import { mapMockVideoToVideo, mapYouTubeVideoToVideo } from '../../../core/utils/video-mapper';
+import { VideoService } from './video.service';
 
 /**
  * Service for fetching video data from different sources.
@@ -18,15 +19,13 @@ import { mapMockVideoToVideo, mapYouTubeVideoToVideo } from '../../../core/utils
 })
 export class VideoHttpService {
   /**
-   * Token for fetching the next page of YouTube videos.
-   */
-  public nextPageToken = '';
-
-  /**
    * Constructs a VideoHttpService.
    * @param http The HTTP client used for making API requests.
    */
-  constructor(private readonly http: HttpClient) {}
+  constructor(
+    private readonly http: HttpClient,
+    private readonly videoService: VideoService,
+  ) {}
 
   /**
    * Fetches videos from the configured source.
@@ -59,11 +58,11 @@ export class VideoHttpService {
       .set('maxResults', count)
       .set('q', query)
       .set('key', environment.youTubeApiKey)
-      .set('pageToken', this.nextPageToken);
+      .set('pageToken', this.videoService.nextPageToken);
 
     return this.http
       .get<any>(url, { params })
-      .pipe(tap((res: any) => (this.nextPageToken = res.nextPageToken)))
+      .pipe(tap((res: any) => (this.videoService.nextPageToken = res.nextPageToken)))
       .pipe(
         map((res: any) =>
           res.items.map(

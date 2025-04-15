@@ -1,5 +1,8 @@
 import { Location } from '@angular/common';
 import { Component, inject } from '@angular/core';
+
+import { MatFabButton } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { YouTubePlayer } from '@angular/youtube-player';
@@ -10,7 +13,7 @@ import { YouTubePlayer } from '@angular/youtube-player';
 @Component({
   selector: 'app-video-player',
   standalone: true,
-  imports: [YouTubePlayer],
+  imports: [YouTubePlayer, MatIconModule, MatFabButton],
   templateUrl: './video-player.component.html',
   styleUrl: './video-player.component.scss',
 })
