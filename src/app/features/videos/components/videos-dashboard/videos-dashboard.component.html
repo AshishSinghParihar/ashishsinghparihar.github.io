@@ -1,5 +1,5 @@
 <div class="container">
-  @for (video of videos; track video.id) {
+  @for (video of videoService.videos(); let idx = $index, e = $even; track video.id + '_'+idx) {
     <app-video-card [video]="video"></app-video-card>
   }
 </div>
