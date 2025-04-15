@@ -1,0 +1,33 @@
+.video-view {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  nav {
+    width: 640px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1em;
+  }
+
+  .back-action {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    .back-btn {
+      border: none;
+      background: none;
+      font-size: 35px;
+    }
+  }
+
+  .video-player {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

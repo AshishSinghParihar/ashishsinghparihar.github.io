@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Location } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+
 import { YouTubePlayer } from '@angular/youtube-player';
 
 @Component({
@@ -9,5 +12,15 @@ import { YouTubePlayer } from '@angular/youtube-player';
   styleUrl: './video-player.component.scss',
 })
 export class VideoPlayerComponent {
-  videoId: string | undefined;
+  private location = inject(Location);
+  private router = inject(Router);
+  videoId = inject(ActivatedRoute).snapshot.paramMap.get('id')!;
+
+  goBack() {
+    this.location.back();
+  }
+
+  goHome() {
+    this.router.navigateByUrl('/');
+  }
 }

@@ -9,6 +9,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'watch/:id',
+    loadComponent: () =>
+      import('../videos/components/video-player/video-player.component').then(
+        (c) => c.VideoPlayerComponent,
+      ),
+  },
+  {
     path: '',
     pathMatch: 'full',
     redirectTo: 'dashboard',
