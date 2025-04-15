@@ -5,6 +5,9 @@ import { VideoHttpService } from '../../services/video-http.service';
 import { VideoCardComponent } from '../video-card/video-card.component';
 import { VideoService } from '../../services/video.service';
 
+/**
+ * Component for displaying a dashboard of videos.
+ */
 @Component({
   selector: 'app-videos-dashboard',
   standalone: true,
@@ -13,8 +16,15 @@ import { VideoService } from '../../services/video.service';
   styleUrl: './videos-dashboard.component.scss',
 })
 export class VideosDashboardComponent implements OnInit {
+  /**
+   * Indicates whether videos are currently being loaded.
+   */
   private loadingVideos: boolean = false;
 
+  /**
+   * Host listener for window scroll events.
+   * Loads more videos when the user scrolls to the bottom of the page.
+   */
   @HostListener('window:scroll', [])
   onScroll(): void {
     const videoElements = document.getElementsByClassName('video-card');
@@ -28,17 +38,29 @@ export class VideosDashboardComponent implements OnInit {
     }
   }
 
+  /**
+   * Constructor for VideosDashboardComponent.
+   * @param videoHttpService Service for fetching videos from the server.
+   * @param videoService Service for managing video data.
+   */
   constructor(
     private readonly videoHttpService: VideoHttpService,
     public videoService: VideoService,
   ) {}
 
+  /**
+   * Lifecycle hook that is called after data-bound properties of a directive are initialized.
+   * Initializes video loading.
+   */
   ngOnInit(): void {
     if (this.videoService.videos().length === 0) {
       this.loadVideos();
     }
   }
 
+  /**
+   * Loads videos from the server and updates the video list.
+   */
   private loadVideos() {
     if (this.loadingVideos) return;
     this.loadingVideos = true;

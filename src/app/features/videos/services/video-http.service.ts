@@ -10,14 +10,28 @@ import { MockVideo } from '../../../shared/models/mock-video.model';
 import { YouTubeVideo } from '../../../shared/models/youtube-video.model';
 import { mapMockVideoToVideo, mapYouTubeVideoToVideo } from '../../../core/utils/video-mapper';
 
+/**
+ * Service for fetching video data from different sources.
+ */
 @Injectable({
   providedIn: 'root',
 })
 export class VideoHttpService {
+  /**
+   * Token for fetching the next page of YouTube videos.
+   */
   public nextPageToken = '';
 
+  /**
+   * Constructs a VideoHttpService.
+   * @param http The HTTP client used for making API requests.
+   */
   constructor(private readonly http: HttpClient) {}
 
+  /**
+   * Fetches videos from the configured source.
+   * @returns An observable of an array of Video objects.
+   */
   fetchVideos(): Observable<Video[]> {
     if (environment.videoSource === VideoSourceEnum.YOUTUBE) {
       return this.fetchYoutubeVideos().pipe(
@@ -31,6 +45,12 @@ export class VideoHttpService {
     return of([]);
   }
 
+  /**
+   * Fetches YouTube videos based on a query.
+   * @param query The search query for YouTube videos.
+   * @param count The number of videos to fetch.
+   * @returns An observable of an array of YouTubeVideo objects.
+   */
   fetchYoutubeVideos(query = 'education videos', count: number = 15): Observable<YouTubeVideo[]> {
     const url = environment.youTubeApiUrl;
     const params = new HttpParams()
@@ -62,6 +82,10 @@ export class VideoHttpService {
       );
   }
 
+  /**
+   * Fetches videos from a mock API.
+   * @returns An observable of an array of MockVideo objects.
+   */
   fetchMockApiVideos(): Observable<MockVideo[]> {
     const url = environment.mockVideoApiUrl;
 
