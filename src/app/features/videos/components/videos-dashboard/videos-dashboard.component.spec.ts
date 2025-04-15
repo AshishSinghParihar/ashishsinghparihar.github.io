@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 
 import { VideosDashboardComponent } from './videos-dashboard.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('VideosDashboardComponent', () => {
   let component: VideosDashboardComponent;
@@ -9,7 +10,7 @@ describe('VideosDashboardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [VideosDashboardComponent],
+      imports: [BrowserAnimationsModule, VideosDashboardComponent],
       providers: [provideHttpClient(withFetch())],
     }).compileComponents();
 
