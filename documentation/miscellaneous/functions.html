@@ -112,10 +112,10 @@
                 <td class="col-md-4">
                     <ul class="index-list">
                         <li>
-                            <a href="#app" title="server.ts" ><b>app</b>&nbsp;&nbsp;&nbsp;(server.ts)</a>
+                            <a href="#mapMockVideoToVideo" title="src/app/core/utils/video-mapper.ts" ><b>mapMockVideoToVideo</b>&nbsp;&nbsp;&nbsp;(src/.../video-mapper.ts)</a>
                         </li>
                         <li>
-                            <a href="#run" title="server.ts" ><b>run</b>&nbsp;&nbsp;&nbsp;(server.ts)</a>
+                            <a href="#mapYouTubeVideoToVideo" title="src/app/core/utils/video-mapper.ts" ><b>mapYouTubeVideoToVideo</b>&nbsp;&nbsp;&nbsp;(src/.../video-mapper.ts)</a>
                         </li>
                     </ul>
                 </td>
@@ -124,22 +124,22 @@
     </table>
 </section>
 
-    <h3>server.ts</h3>
+    <h3>src/app/core/utils/video-mapper.ts</h3>
     <section data-compodoc="block-methods">
     <h3></h3>    <table class="table table-sm table-bordered">
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="app"></a>
+                    <a name="mapMockVideoToVideo"></a>
                     <span class="name">
-                        <span ><b>app</b></span>
-                        <a href="#app"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>mapMockVideoToVideo</b></span>
+                        <a href="#mapMockVideoToVideo"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>app()</code>
+<code>mapMockVideoToVideo(mockVideo: <a href="../interfaces/MockVideo.html" target="_self">MockVideo</a>)</code>
                 </td>
             </tr>
 
@@ -148,11 +148,49 @@
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Maps a MockVideo object to a Video object.</p>
+</div>
 
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>mockVideo</td>
+                                            <td>
+                                                            <code><a href="../interfaces/MockVideo.html" target="_self" >MockVideo</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>The MockVideo object to map.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         <div class="io-description">
-                            <b>Returns : </b>    <code>express.Express</code>
+                            <b>Returns : </b>        <code><a href="../classes/Video.html" target="_self" >Video</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>A Video object with properties mapped from the MockVideo.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -161,16 +199,16 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="run"></a>
+                    <a name="mapYouTubeVideoToVideo"></a>
                     <span class="name">
-                        <span ><b>run</b></span>
-                        <a href="#run"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>mapYouTubeVideoToVideo</b></span>
+                        <a href="#mapYouTubeVideoToVideo"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>run()</code>
+<code>mapYouTubeVideoToVideo(youtubeVideo: <a href="../interfaces/YouTubeVideo.html" target="_self">YouTubeVideo</a>)</code>
                 </td>
             </tr>
 
@@ -179,11 +217,49 @@
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Maps a YouTubeVideo object to a Video object.</p>
+</div>
 
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>youtubeVideo</td>
+                                            <td>
+                                                            <code><a href="../interfaces/YouTubeVideo.html" target="_self" >YouTubeVideo</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>The YouTubeVideo object to map.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                            <b>Returns : </b>        <code><a href="../classes/Video.html" target="_self" >Video</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>A Video object with properties mapped from the YouTubeVideo.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>

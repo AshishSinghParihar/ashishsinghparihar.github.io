@@ -83,6 +83,8 @@
                    <div class="content-data">
 
 <h1>YoutubeLite</h1>
+<p><a href="https://ashishsinghparihar.github.io/documentation/index.html"><img src="https://img.shields.io/badge/docs-live-blue" alt="Documentation" class="img-responsive"></a></p>
+<p>YoutubeLite is a frontend-only learning project built with <strong>Angular 18</strong>, designed to explore best practices in modern frontend development, testing, and tooling.</p>
 <p>This project was generated with <a href="https://github.com/angular/angular-cli">Angular CLI</a> version 18.0.6.</p>
 <h2>Development server</h2>
 <p>Run <code>ng serve</code> for a dev server. Navigate to <code>http://localhost:4200/</code>. The application will automatically reload if you change any of the source files.</p>
@@ -90,12 +92,88 @@
 <p>Run <code>ng generate component component-name</code> to generate a new component. You can also use <code>ng generate directive|pipe|service|class|guard|interface|enum|module</code>.</p>
 <h2>Build</h2>
 <p>Run <code>ng build</code> to build the project. The build artifacts will be stored in the <code>dist/</code> directory.</p>
+<h2>Tech Stack &amp; Tooling</h2>
+<p>This project is powered by a modern frontend ecosystem and integrates several quality assurance and developer tooling configurations:</p>
+<ul>
+<li><strong>Angular 18</strong> – The latest version of Angular for building high-performance, scalable single-page applications using standalone components and improved testing APIs.</li>
+<li><strong>ESLint</strong> – Linter configured using <code>eslint.config.mjs</code> for enforcing consistent code quality and best practices. Includes Angular-specific and TypeScript rules.</li>
+<li><strong>Karma</strong> – Configured in <code>karma.conf.js</code> to ensure a minimum of <strong>90% test coverage</strong> across statements, branches, functions, and lines. Reports are generated in HTML, LCOV, and summary formats.</li>
+<li><strong>Husky Git Hooks</strong> – Enforces CI/CD-like checks before commits and pushes:<ul>
+<li><code>commit-msg</code> – Validates the format of commit messages to ensure consistency.</li>
+<li><code>pre-commit</code> – Automatically runs Prettier and ESLint via lint-staged for staged files.</li>
+<li><code>pre-push</code> – Executes unit tests, checks for test coverage and builds code before pushing to repository. Push is blocked if coverage is below threshold or tests fail.</li>
+</ul>
+</li>
+<li><strong>lint-staged</strong> – Optimizes linting to only staged files, improving pre-commit performance.</li>
+<li><strong>Prettier</strong> – Formatter integrated with <code>.prettierrc</code> and <code>.prettierignore</code> to maintain consistent code styling.</li>
+<li><strong>CompoDoc</strong> – Documentation tool for generating a live, navigable UI documentation site from Angular components and services.</li>
+</ul>
 <h2>Running unit tests</h2>
-<p>Run <code>ng test</code> to execute the unit tests via <a href="https://karma-runner.github.io">Karma</a>.</p>
-<h2>Running end-to-end tests</h2>
-<p>Run <code>ng e2e</code> to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.</p>
-<h2>Further help</h2>
-<p>To get more help on the Angular CLI use <code>ng help</code> or go check out the <a href="https://angular.dev/tools/cli">Angular CLI Overview and Command Reference</a> page.</p>
+<p>Execute the unit tests via <a href="https://karma-runner.github.io">Karma</a>.</p>
+<h3>Watch Mode + Browser Report</h3>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">npm run test</code></pre></div><ul>
+<li>Launches in <strong>Chrome</strong></li>
+<li>Opens browser with live Karma test results</li>
+</ul>
+<h3>Headless Mode with Coverage</h3>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">npm run test:no-watch</code></pre></div><ul>
+<li>Uses <strong>ChromeHeadless</strong></li>
+<li>Generates code coverage report</li>
+<li>Coverage thresholds:<ul>
+<li>Statements: <code>&gt;=90%</code></li>
+<li>Branches: <code>&gt;=90%</code></li>
+<li>Functions: <code>&gt;=90%</code></li>
+<li>Lines: <code>&gt;=90%</code></li>
+</ul>
+</li>
+</ul>
+<h2>Linting</h2>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">npm run lint</code></pre></div><h3>Linting using ESLInt</h3>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">npm run eslint</code></pre></div><ul>
+<li>Uses <code>eslint.config.mjs</code></li>
+<li>Ignores: <code>dist/</code>, <code>coverage/</code>, <code>documentation/</code> and other unnecessary files</li>
+</ul>
+<h3>Staged File Linting</h3>
+<p>Configured via <code>.lintstagedrc</code> and triggered by Husky on <code>pre-commit</code>.</p>
+<h2>Formatting</h2>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">npm run format</code></pre></div><ul>
+<li>Uses Prettier</li>
+<li>Configured with <code>.prettierrc</code> and <code>.prettierignore</code></li>
+</ul>
+<h2>Git Hooks (via Husky)</h2>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>Hook</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>commit-msg</code></td>
+<td>Validates commit message format</td>
+</tr>
+<tr>
+<td><code>pre-commit</code></td>
+<td>Runs ESLint + Prettier via lint-staged</td>
+</tr>
+<tr>
+<td><code>pre-push</code></td>
+<td>Runs <code>test:no-watch</code> + <code>ng build</code> and blocks push if tests/coverage fail</td>
+</tr>
+</tbody>
+</table>
+<h2>Development Server</h2>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">ng serve</code></pre></div><p>Navigate to: <a href="http://localhost:4200">http://localhost:4200</a></p>
+<h2>Build</h2>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">ng build</code></pre></div><p>Output is saved to the <code>dist/</code> directory.</p>
+<h2>Live Documentation</h2>
+<p>Auto-generated using <strong>CompoDoc</strong> and deployed on <strong>GitHub Pages</strong>
+📖 <a href="https://ashishsinghparihar.github.io/documentation/index.html">Live Docs</a></p>
+<p>Generate locally:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">npm run docs:build</code></pre></div><h2>Help</h2>
+<p>Run:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">ng help</code></pre></div><p>Or refer to the <a href="https://angular.dev/tools/cli">Angular CLI Documentation</a></p>
 
 
 

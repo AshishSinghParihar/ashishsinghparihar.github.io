@@ -1,0 +1,16 @@
+<div class="container video-view">
+  <nav>
+    <button class="back-action" (click)="goBack()" mat-fab extended>
+      <mat-icon>arrow_back</mat-icon>
+      Back
+    </button>
+
+    <button class="home-action" (click)="goHome()" mat-fab extended>
+      <mat-icon>home</mat-icon>
+      Home
+    </button>
+  </nav>
+  <div class="video-player">
+    <youtube-player [videoId]="videoId"></youtube-player>
+  </div>
+</div>

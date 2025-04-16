@@ -1,0 +1,28 @@
+<div class="video-card">
+  <img
+    tabindex="0"
+    (click)="openVideo()"
+    (keydown.enter)="openVideo()"
+    class="video-thumbnail"
+    [src]="video.thumbnail.url"
+    alt="Thumbnail for video {{ video.title }}"
+    [attr.height]="video.thumbnail.height + 'px'"
+    [attr.width]="video.thumbnail.width + 'px'"
+  />
+  <div class="video-card-content">
+    <div
+      role="link"
+      tabindex="0"
+      class="video-title"
+      (click)="openVideo()"
+      (keydown.enter)="openVideo()"
+    >
+      {{ video.title }}
+    </div>
+    <div class="video-details">
+      <div class="video-description">{{ video.author }}</div>
+      <div class="video-description">{{ video.uploadDate | date }}</div>
+    </div>
+    <div class="video-description">{{ video.description }}</div>
+  </div>
+</div>

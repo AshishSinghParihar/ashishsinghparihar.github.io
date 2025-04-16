@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="action-container">
+    <button class="refresh-btn" mat-fab extended (click)="onRefresh()">
+      <mat-icon>refresh</mat-icon>
+      Refresh
+    </button>
+
+    <mat-form-field class="search-box" subscriptSizing="dynamic">
+      <mat-label>Search Videos</mat-label>
+      <input
+        matInput
+        (keyup.enter)="onSearch()"
+        [(ngModel)]="searchQuery"
+        placeholder="Type to search"
+      />
+      <button class="material-icon-btn" mat-icon-button matSuffix (click)="onSearch()">
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <div class="videos-container">
+    @for (video of filteredVideos; let idx = $index, e = $even; track video.id + '_'+idx) {
+      <app-video-card [video]="video"></app-video-card>
+    } @empty {
+      <p class="no-videos">
+        @if (videoService.videos().length === 0) {
+          No videos available!
+        } @else {
+          No videos found with matching criteria!
+        }
+      </p>
+    }
+  </div>
+</div>

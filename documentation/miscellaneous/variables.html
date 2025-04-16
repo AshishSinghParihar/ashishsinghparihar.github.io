@@ -163,6 +163,7 @@
     provideRouter(routes),
     provideClientHydration(),
     provideAnimationsAsync(),
+    provideHttpClient(withFetch()),
   ],
 }</code>
                     </td>
@@ -299,9 +300,7 @@
                 <tr>
                     <td class="col-md-4">
                         <i>Default value : </i><code>{
-  providers: [
-    provideServerRendering()
-  ]
+  providers: [provideServerRendering()],
 }</code>
                     </td>
                 </tr>
