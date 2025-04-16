@@ -1,7 +1,18 @@
+.video-dashboard {
+  position: relative;
+  top: var(--dashboard-search-height);
+}
+
 .action-container {
+  position: fixed;
+  top: var(--app-header-height);
+  z-index: 1000;
+  width: 100%;
   display: flex;
   align-items: center;
-  margin-top: 1.5em;
+  background-color: var(--mat-app-background-color);
+  padding: 0 300px;
+  height: var(--dashboard-search-height);
 
   .refresh-btn {
     margin-right: 2rem;

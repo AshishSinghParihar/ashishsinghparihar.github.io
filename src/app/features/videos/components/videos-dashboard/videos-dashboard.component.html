@@ -1,4 +1,4 @@
-<div class="container">
+<section class="video-dashboard">
   <div class="action-container">
     <button class="refresh-btn" mat-fab extended (click)="onRefresh()">
       <mat-icon>refresh</mat-icon>
@@ -13,7 +13,7 @@
         [(ngModel)]="searchQuery"
         placeholder="Type to search"
       />
-      <button class="material-icon-btn" mat-icon-button matSuffix (click)="onSearch()">
+      <button mat-icon-button matSuffix (click)="onSearch()">
         <mat-icon>search</mat-icon>
       </button>
     </mat-form-field>
@@ -31,4 +31,4 @@
       </p>
     }
   </div>
-</div>
+</section>

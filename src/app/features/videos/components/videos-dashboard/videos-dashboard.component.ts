@@ -51,11 +51,11 @@ export class VideosDashboardComponent implements OnInit {
   onScroll(): void {
     const videoElements = document.getElementsByClassName('video-card');
     const lastVideoElement = videoElements[videoElements.length - 1];
-    if (lastVideoElement) {
+    if (lastVideoElement && !this.searchQuery) {
       const rect = lastVideoElement.getBoundingClientRect();
       const isVisible = rect.bottom <= window.innerHeight;
       if (isVisible && !this.fetchingVideos) {
-        this.loadVideos();
+        this.loadVideos(false);
       }
     }
   }
@@ -78,7 +78,7 @@ export class VideosDashboardComponent implements OnInit {
   ngOnInit(): void {
     this.searchQuery = this.videoService.searchQuery();
     if (this.videoService.videos().length === 0) {
-      this.loadVideos();
+      this.loadVideos(true);
     } else {
       this.onSearch();
     }
@@ -86,15 +86,40 @@ export class VideosDashboardComponent implements OnInit {
 
   /**
    * Loads videos from the server and updates the video list.
-   * Displays an error message if the video fetching fails.
+   *
+   * This method initiates a request to fetch videos from the server using the `videoHttpService`.
+   * It updates the video list in the `videoService` based on whether it's a fresh load or an incremental update.
+   * If the video fetching fails, an error message is displayed using a snackbar.
+   *
+   * @param freshLoad - A boolean indicating whether to perform a fresh load of videos.
+   *                    If true, the current video list is replaced with the newly fetched videos.
+   *                    If false, the newly fetched videos are appended to the existing list.
+   *
+   * Behavior:
+   * - If videos are currently being fetched (`fetchingVideos` is true), the method returns immediately to prevent duplicate requests.
+   * - Sets `fetchingVideos` to true to indicate that a fetch operation is in progress.
+   * - Subscribes to the video fetching observable:
+   *   - On success (`next` callback):
+   *     - If `freshLoad` is true, replaces the existing video list with the fetched videos.
+   *     - If `freshLoad` is false, appends the fetched videos to the existing list.
+   *     - Calls `onSearch()` to update the filtered video list based on the current search query.
+   *     - Sets `fetchingVideos` to false to indicate the fetch operation is complete.
+   *   - On error (`error` callback):
+   *     - Logs the error to the console.
+   *     - Sets `fetchingVideos` to false.
+   *     - Displays an error message using `snackBar`, defaulting to 'Something went wrong!' if no specific error message is provided.
    */
-  private loadVideos() {
+  private loadVideos(freshLoad: boolean) {
     if (this.fetchingVideos) return;
     this.fetchingVideos = true;
 
     this.videoHttpService.fetchVideos().subscribe({
       next: (videos: Video[]) => {
-        this.videoService.videos.update((currentVideos) => [...currentVideos, ...videos]);
+        if (freshLoad) {
+          this.videoService.videos.set(videos);
+        } else {
+          this.videoService.videos.update((currentVideos) => [...currentVideos, ...videos]);
+        }
         this.fetchingVideos = false;
 
         this.onSearch();
@@ -133,6 +158,6 @@ export class VideosDashboardComponent implements OnInit {
    */
   onRefresh(): void {
     this.videoService.nextPageToken = '';
-    this.loadVideos();
+    this.loadVideos(true);
   }
 }

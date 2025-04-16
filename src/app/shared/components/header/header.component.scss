@@ -1,4 +1,19 @@
-.navbar {
-  background-color: #dadada;
-  color: #000;
+.app-header {
+  background: var(--app-primary-bg-color);
+  color: var(--app-primary-contrast-color);
+  height: var(--app-header-height);
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+
+  .app-logo {
+    font-weight: 700;
+    font-size: 24px;
+  }
 }
