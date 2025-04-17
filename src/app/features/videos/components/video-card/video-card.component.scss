@@ -1,45 +1,60 @@
 .video-card {
+  --card-height: 260px;
+  --thumbnail-height: 180px;
+
   display: flex;
+  flex-direction: column;
   overflow: hidden;
-  height: 380px;
+  height: var(--card-height);
   width: 100%;
-  margin: 20px 0px;
+  min-width: 220px;
+  margin-top: 10px;
   transition:
     transform 0.2s,
     box-shadow 0.2s;
   background-color: #fff;
   border: 1px solid #dfdfdf;
+  border-radius: 1rem;
 
   &:hover {
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
   }
 
   .video-thumbnail {
-    margin: 10px;
     object-fit: cover;
-    border-radius: 1rem;
     cursor: pointer;
+    height: var(--thumbnail-height);
+    width: auto;
   }
 
   .video-card-content {
-    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    padding: 5px 10px;
+    letter-spacing: normal;
+    line-height: 1.2;
+    height: calc(var(--card-height) - var(--thumbnail-height));
 
     .video-title {
-      font-size: 16px;
-      font-weight: bold;
+      flex: 1;
+      font-size: 14px;
+      font-weight: 500;
       color: #333;
       cursor: pointer;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: break-line;
     }
 
     .video-details {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 30px;
+      margin-top: 5px;
     }
 
     .video-description {
-      font-size: 0.9rem;
+      font-size: 13px;
       color: #666;
     }
   }
