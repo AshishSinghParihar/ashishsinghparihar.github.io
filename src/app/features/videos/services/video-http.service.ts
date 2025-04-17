@@ -51,7 +51,7 @@ export class VideoHttpService {
    * @returns An observable of an array of YouTubeVideo objects.
    */
   fetchYoutubeVideos(query = 'education videos', count: number = 15): Observable<YouTubeVideo[]> {
-    const url = environment.youTubeApiUrl;
+    const url = environment.ytSearchApi;
     const params = new HttpParams()
       .set('part', 'snippet')
       .set('type', 'video')
@@ -63,6 +63,49 @@ export class VideoHttpService {
     return this.http
       .get<any>(url, { params })
       .pipe(tap((res: any) => (this.videoService.nextPageToken = res.nextPageToken)))
+      .pipe(
+        map((res: any) =>
+          res.items.map(
+            (item: any) =>
+              ({
+                videoId: item.id.videoId,
+                videoTitle: item.snippet.title,
+                videoDescription: item.snippet.description,
+                videoThumbnail: item.snippet.thumbnails.high,
+                videoVisibility: VideoVisibilityEnum.PUBLIC,
+                videoAuthor: item.snippet.channelTitle,
+                videoPostedOn: item.snippet.publishTime,
+              }) as YouTubeVideo,
+          ),
+        ),
+      );
+  }
+
+  fetchVideoDetails(videoId: string): Observable<Video[]> {
+    if (environment.videoSource === VideoSourceEnum.YOUTUBE) {
+      return this.fetchYouTubeVideoDetails(videoId).pipe(
+        map((res: any) => res.map((item: YouTubeVideo) => mapYouTubeVideoToVideo(item))),
+      );
+    } else if (environment.videoSource === VideoSourceEnum.MOCK_API) {
+      return this.fetchMockApiVideos().pipe(
+        map((res: any) => res.map((item: MockVideo) => mapMockVideoToVideo(item))),
+      );
+    }
+    return of([]);
+  }
+
+  fetchYouTubeVideoDetails(videoId: string) {
+    const url = environment.ytVideosApi;
+    const params = new HttpParams()
+      .set('part', 'snippet')
+      .set('id', videoId)
+      .set('key', environment.youTubeApiKey);
+
+    return this.http
+      .get<YouTubeVideo>(url, {
+        params,
+      })
+      .pipe(tap((res: any) => console.log('Video Details::', res)))
       .pipe(
         map((res: any) =>
           res.items.map(
