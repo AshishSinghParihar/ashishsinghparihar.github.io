@@ -21,6 +21,7 @@ export class VideoHttpService {
   /**
    * Constructs a VideoHttpService.
    * @param http The HTTP client used for making API requests.
+   * @param videoService Service for managing video data and pagination.
    */
   constructor(
     private readonly http: HttpClient,
@@ -29,6 +30,7 @@ export class VideoHttpService {
 
   /**
    * Fetches videos from the configured source.
+   * Determines the source based on the environment configuration and fetches videos accordingly.
    * @returns An observable of an array of Video objects.
    */
   fetchVideos(): Observable<Video[]> {
@@ -46,8 +48,9 @@ export class VideoHttpService {
 
   /**
    * Fetches YouTube videos based on a query.
-   * @param query The search query for YouTube videos.
-   * @param count The number of videos to fetch.
+   * Utilizes the YouTube Data API to search for videos matching the query.
+   * @param query The search query for YouTube videos. Defaults to 'education videos'.
+   * @param count The number of videos to fetch. Defaults to 15.
    * @returns An observable of an array of YouTubeVideo objects.
    */
   fetchYoutubeVideos(query = 'education videos', count: number = 15): Observable<YouTubeVideo[]> {
@@ -81,6 +84,12 @@ export class VideoHttpService {
       );
   }
 
+  /**
+   * Fetches detailed information about a specific video.
+   * Determines the source based on the environment configuration and fetches video details accordingly.
+   * @param videoId The unique identifier of the video to fetch details for.
+   * @returns An observable of an array of Video objects.
+   */
   fetchVideoDetails(videoId: string): Observable<Video[]> {
     if (environment.videoSource === VideoSourceEnum.YOUTUBE) {
       return this.fetchYouTubeVideoDetails(videoId).pipe(
@@ -94,6 +103,12 @@ export class VideoHttpService {
     return of([]);
   }
 
+  /**
+   * Fetches detailed information about a specific YouTube video.
+   * Utilizes the YouTube Data API to retrieve video details.
+   * @param videoId The unique identifier of the YouTube video to fetch details for.
+   * @returns An observable of an array of YouTubeVideo objects.
+   */
   fetchYouTubeVideoDetails(videoId: string) {
     const url = environment.ytVideosApi;
     const params = new HttpParams()
@@ -126,6 +141,7 @@ export class VideoHttpService {
 
   /**
    * Fetches videos from a mock API.
+   * Used for testing and development purposes when YouTube API is not available.
    * @returns An observable of an array of MockVideo objects.
    */
   fetchMockApiVideos(): Observable<MockVideo[]> {

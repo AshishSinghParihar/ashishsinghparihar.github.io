@@ -14,6 +14,7 @@ import { VideoService } from '../../services/video.service';
 
 /**
  * Component for displaying a dashboard of videos.
+ * This component allows users to search, view, and refresh a list of videos.
  */
 @Component({
   selector: 'app-videos-dashboard',
@@ -32,14 +33,19 @@ import { VideoService } from '../../services/video.service';
 export class VideosDashboardComponent implements OnInit {
   /**
    * Indicates whether videos are currently being fetched.
+   * Used to prevent duplicate requests during data fetching.
    */
   private fetchingVideos: boolean = false;
+
   /**
    * The search query entered by the user.
+   * This query is used to filter the list of videos.
    */
   public searchQuery: string = '';
+
   /**
    * The list of videos filtered based on the search query.
+   * This array is updated whenever the search query changes.
    */
   public filteredVideos: Video[] = [];
 
@@ -62,6 +68,7 @@ export class VideosDashboardComponent implements OnInit {
 
   /**
    * Constructor for VideosDashboardComponent.
+   * @param snackBar The Angular Material Snackbar service for displaying messages.
    * @param videoHttpService Service for fetching videos from the server.
    * @param videoService Service for managing video data.
    */

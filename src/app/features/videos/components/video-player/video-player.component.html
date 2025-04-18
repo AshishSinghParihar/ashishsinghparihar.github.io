@@ -1,26 +1,39 @@
-<div class="container video-view">
-  <nav>
-    <button class="back-action" (click)="goBack()" mat-fab extended>
-      <mat-icon>arrow_back</mat-icon>
-      Back
-    </button>
+<div class="player-container">
+  <div class="video-view">
+    <nav>
+      <button class="back-action" (click)="goBack()" mat-fab extended>
+        <mat-icon>arrow_back</mat-icon>
+        Back
+      </button>
 
-    <button class="home-action" (click)="goHome()" mat-fab extended>
-      <mat-icon>home</mat-icon>
-      Home
-    </button>
-  </nav>
-  <div class="video-player">
-    <youtube-player [videoId]="videoId" [height]="500" [width]="900"></youtube-player>
-    <div class="video-card-content">
-      <div tabindex="0" class="video-title">
-        {{ video.title }}
+      <button class="home-action" (click)="goHome()" mat-fab extended>
+        <mat-icon>home</mat-icon>
+        Home
+      </button>
+    </nav>
+    <div class="video-player">
+      <youtube-player [videoId]="videoId" [height]="500" [width]="900"></youtube-player>
+      <div class="video-card-content">
+        <div tabindex="0" class="video-title">
+          {{ video.title }}
+        </div>
+        <div class="video-details">
+          <div>{{ video.author }}</div>
+          <div>{{ video.uploadDate | date }}</div>
+        </div>
+        <div class="video-description">
+          {{
+            isDescriptionExpanded ? video.description : (video.description | slice: 0 : 200) + '...'
+          }}
+          <a href="#" class="description-toggle" (click)="toggleDescription($event)">
+            @if (!isDescriptionExpanded) {
+              ...more
+            } @else {
+              show less
+            }
+          </a>
+        </div>
       </div>
-      <div class="video-details">
-        <div>{{ video.author }}</div>
-        <div>{{ video.uploadDate | date }}</div>
-      </div>
-      <div class="video-description">{{ video.description }}</div>
     </div>
   </div>
 </div>

@@ -1,4 +1,4 @@
-import { DatePipe, Location } from '@angular/common';
+import { DatePipe, Location, NgIf, SlicePipe } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -13,30 +13,44 @@ import { VideoHttpService } from '../../services/video-http.service';
 
 /**
  * Component for playing YouTube videos.
+ * This component is responsible for displaying a video player, video details, and navigation controls.
  */
 @Component({
   selector: 'app-video-player',
   standalone: true,
-  imports: [DatePipe, YouTubePlayer, MatIconModule, MatFabButton],
+  imports: [NgIf, DatePipe, SlicePipe, YouTubePlayer, MatIconModule, MatFabButton],
   templateUrl: './video-player.component.html',
   styleUrl: './video-player.component.scss',
 })
 export class VideoPlayerComponent implements OnInit {
   /**
    * Service to interact with the browser's URL.
+   * Used for navigating back in the browser history.
    */
   private location = inject(Location);
 
   /**
    * Service to handle navigation within the app.
+   * Used for navigating to different routes.
    */
   private router = inject(Router);
 
   /**
    * The ID of the video to be played, extracted from the route parameters.
+   * This ID is used to fetch and display the correct video.
    */
   videoId = inject(ActivatedRoute).snapshot.paramMap.get('id')!;
 
+  /**
+   * Boolean flag to determine if the full video description should be displayed.
+   * Initially set to false to show a truncated description.
+   */
+  isDescriptionExpanded = false;
+
+  /**
+   * The video object containing details about the video being played.
+   * Includes properties such as title, description, author, and thumbnail.
+   */
   video: Video = new Video({
     id: 'amTmnnqQf_E',
     title:
@@ -53,16 +67,30 @@ export class VideoPlayerComponent implements OnInit {
     uploadDate: '2023-12-06T12:30:00Z',
   });
 
+  /**
+   * Constructs a VideoPlayerComponent.
+   * @param snackBar The Angular Material Snackbar service for displaying messages.
+   * @param videoHttpService The service for fetching video data from the server.
+   * @param videoService The service for managing video data.
+   */
   constructor(
     private snackBar: MatSnackBar,
     private videoHttpService: VideoHttpService,
     private videoService: VideoService,
   ) {}
 
+  /**
+   * Lifecycle hook that is called after data-bound properties of a directive are initialized.
+   * Initializes the video player by setting the current video.
+   */
   ngOnInit(): void {
     this.setCurrentVideo();
   }
 
+  /**
+   * Sets the current video to be displayed based on the video ID.
+   * If the video is not found in the fetched videos, it attempts to fetch video details.
+   */
   private setCurrentVideo() {
     const allFetchedVideos = this.videoService.videos();
     const video = allFetchedVideos.find((v: Video) => v.id === this.videoId);
@@ -71,9 +99,12 @@ export class VideoPlayerComponent implements OnInit {
     } else {
       // this.fetchVideosDetails();
     }
-    console.log('VideoPlayer', this.video);
   }
 
+  /**
+   * Fetches video details from the server if not available locally.
+   * Updates the video object with the fetched data.
+   */
   private fetchVideosDetails() {
     this.videoHttpService.fetchVideoDetails(this.videoId).subscribe({
       next: (video: Video[]) => {
@@ -85,6 +116,15 @@ export class VideoPlayerComponent implements OnInit {
         this.snackBar.open(error?.error?.error?.message ?? 'Something went wrong!', 'Okay');
       },
     });
+  }
+
+  /**
+   * Toggles the display of the video description between truncated and full view.
+   * @param event The click event that triggers the toggle.
+   */
+  toggleDescription(event: Event): void {
+    event.preventDefault();
+    this.isDescriptionExpanded = !this.isDescriptionExpanded;
   }
 
   /**
