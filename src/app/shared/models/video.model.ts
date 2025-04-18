@@ -46,11 +46,15 @@ export class Video {
   constructor(data: any) {
     this._id = data?.id;
     this._title = data?.title;
-    this._description = data?.description;
+    this._description = this.formatDescription(data?.description);
     this._thumbnail = new Thumbnail(data?.thumbnail);
     this._visibility = data?.visibility;
     this._author = data?.author;
     this._uploadDate = data.uploadDate;
+  }
+
+  private formatDescription(text: string) {
+    return text ? text.replaceAll('\\n', '\n') : text;
   }
 
   /**

@@ -1,4 +1,5 @@
 .video-view {
+  width: 900px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -27,7 +28,38 @@
 
   .video-player {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+  }
+}
+
+.video-card-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+
+  .video-title {
+    flex: 1;
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+  }
+
+  .video-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: #444;
+  }
+
+  .video-description {
+    margin-top: 1em;
+    font-size: 13px;
+    color: #666;
+    white-space: pre-line;
+    line-height: 1.2;
   }
 }
