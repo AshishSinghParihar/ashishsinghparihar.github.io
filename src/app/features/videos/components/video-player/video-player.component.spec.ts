@@ -1,7 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ActivatedRoute, convertToParamMap } from '@angular/router';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 
 import { VideoPlayerComponent } from './video-player.component';
-import { ActivatedRoute, convertToParamMap } from '@angular/router';
 
 describe('VideoPlayerComponent', () => {
   let component: VideoPlayerComponent;
@@ -11,6 +12,7 @@ describe('VideoPlayerComponent', () => {
     await TestBed.configureTestingModule({
       imports: [VideoPlayerComponent],
       providers: [
+        provideHttpClient(withFetch()),
         {
           provide: ActivatedRoute,
           useValue: {
